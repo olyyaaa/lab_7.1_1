@@ -6,17 +6,36 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1
 {
-	TEST_CLASS(UnitTest1)
-	{
-	public:
-		
-		TEST_METHOD(TestCreateFunction)
-		{
-			double expected = -0.42976727906624879;
+    TEST_CLASS(UnitTest1)
+    {
+    public:
 
-			double res = Create(int** b, const int rowCount, const int colCount, const int Low, const int High);
+        TEST_METHOD(TestCreateFunction)
+        {
+            int inputMatrix[2][4] = { {14, 14, 12, 14 }, { 14, 11, 14, 11 } };
+            int** b = new int* [2];
+            for (int i = 0; i < 2; i++)
+                b[i] = new int[4];
 
-			Assert::AreEqual(res, expected);
-		}
-	};
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    b[i][j] = inputMatrix[i][j];
+                }
+            }
+
+            Sort(b, 2, 4);
+
+
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    Assert::AreEqual(b[i][j], inputMatrix[i][j]);
+                }
+            }
+        }
+    };
 }
+
